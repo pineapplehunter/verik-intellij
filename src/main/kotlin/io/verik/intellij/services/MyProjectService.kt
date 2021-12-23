@@ -1,7 +1,7 @@
-package com.github.frwang96.verikintellij.services
+package io.verik.intellij.services
 
 import com.intellij.openapi.project.Project
-import com.github.frwang96.verikintellij.MyBundle
+import io.verik.intellij.MyBundle
 
 class MyProjectService(project: Project) {
 

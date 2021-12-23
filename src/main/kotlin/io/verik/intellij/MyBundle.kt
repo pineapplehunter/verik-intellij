@@ -1,4 +1,4 @@
-package com.github.frwang96.verikintellij
+package io.verik.intellij
 
 import com.intellij.DynamicBundle
 import org.jetbrains.annotations.NonNls

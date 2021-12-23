@@ -1,18 +1,18 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
-<idea-plugin>
-    <id>com.github.frwang96.verikintellij</id>
-    <name>verik-intellij</name>
-    <vendor>frwang96</vendor>
+<idea-plugin url="https://verik.io">
+    <id>io.verik.intellij</id>
+    <name>Verik</name>
+    <vendor>Verik</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.frwang96.verikintellij.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.frwang96.verikintellij.services.MyProjectService"/>
+        <applicationService serviceImplementation="io.verik.intellij.services.MyApplicationService"/>
+        <projectService serviceImplementation="io.verik.intellij.services.MyProjectService"/>
     </extensions>
 
     <applicationListeners>
-        <listener class="com.github.frwang96.verikintellij.listeners.MyProjectManagerListener"
+        <listener class="io.verik.intellij.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 </idea-plugin>

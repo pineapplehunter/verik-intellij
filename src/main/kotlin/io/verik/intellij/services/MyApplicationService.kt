@@ -1,6 +1,6 @@
-package com.github.frwang96.verikintellij.services
+package io.verik.intellij.services
 
-import com.github.frwang96.verikintellij.MyBundle
+import io.verik.intellij.MyBundle
 
 class MyApplicationService {
 

@@ -1,4 +1,4 @@
-package com.github.frwang96.verikintellij
+package io.verik.intellij
 
 import com.intellij.ide.highlighter.XmlFileType
 import com.intellij.psi.xml.XmlFile
