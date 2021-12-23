@@ -1,7 +1,7 @@
-package org.jetbrains.plugins.template.services
+package com.github.frwang96.verikintellij.services
 
 import com.intellij.openapi.project.Project
-import org.jetbrains.plugins.template.MyBundle
+import com.github.frwang96.verikintellij.MyBundle
 
 class MyProjectService(project: Project) {
 
