@@ -7,13 +7,13 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="350"
-   height="350"
-   viewBox="0 0 92.60417 92.604161"
+   width="16"
+   height="16"
+   viewBox="0 0 4.2333335 4.2333331"
    version="1.1"
    id="svg5"
    inkscape:version="1.0.1 (c497b03c, 2020-09-10)"
-   sodipodi:docname="logo.svg">
+   sodipodi:docname="pluginIconFileType.svg">
   <metadata
      id="metadata37">
     <rdf:RDF>
@@ -22,7 +22,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -37,9 +37,9 @@
      inkscape:document-units="px"
      showgrid="false"
      units="px"
-     inkscape:zoom="2"
-     inkscape:cx="239.74209"
-     inkscape:cy="142.25"
+     inkscape:zoom="44.693077"
+     inkscape:cx="5.2570093"
+     inkscape:cy="6.3084112"
      inkscape:window-width="3360"
      inkscape:window-height="1837"
      inkscape:window-x="0"
@@ -254,12 +254,12 @@
        inkscape:rounded="0"
        inkscape:randomized="0"
        d="M 27.092144,19.835687 73.534049,30.339462 41.216561,65.307444 Z"
-       inkscape:transform-center-x="-0.096955021"
-       inkscape:transform-center-y="11.921643"
-       transform="rotate(1.443704,9.3389704,-6.3993584)" />
+       inkscape:transform-center-x="-0.0047597033"
+       inkscape:transform-center-y="0.58520335"
+       transform="matrix(0.04907192,0.00123674,-0.00123674,0.04907192,-0.16351389,-0.06570336)" />
     <g
        id="g52345-6-6"
-       transform="matrix(0.82349433,0,0,0.82349433,-34.974664,-28.115298)"
+       transform="matrix(0.04042328,0,0,0.04042328,-1.8725631,-1.4341625)"
        style="stroke:#648cac;stroke-width:9.7147;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
       <path
          style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#648cac;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:9.7147;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
@@ -269,7 +269,7 @@
     </g>
     <g
        aria-label="Verik"
-       transform="matrix(1.017641,0,0,0.98266481,-0.73915343,7.5532242)"
+       transform="matrix(0.49953453,0,0,0.48236559,-9.1477047,-8.5950612)"
        id="text53031"
        style="font-size:70.564px;line-height:0.35;font-family:'Gill Sans MT';-inkscape-font-specification:'Gill Sans MT';letter-spacing:0px;word-spacing:0px;fill:#1d3790;stroke-width:0">
       <text
@@ -287,7 +287,7 @@
     </g>
     <g
        id="g52345-6-6-9"
-       transform="matrix(-0.41174717,0.71316702,-0.71316702,-0.41174717,145.19506,2.9660255)"
+       transform="matrix(-0.02021165,0.03500759,-0.03500758,-0.02021164,6.9715132,0.09154093)"
        style="fill:#0583d2;fill-opacity:1;stroke:#648cac;stroke-width:9.7147;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
       <path
          style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#0583d2;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:9.7147;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
@@ -297,7 +297,7 @@
     </g>
     <g
        id="g52345-6-6-49"
-       transform="matrix(-0.41174717,-0.71316702,0.71316702,-0.41174717,28.192982,143.45692)"
+       transform="matrix(-0.02021165,-0.03500759,0.03500758,-0.02021164,1.2281766,6.9878844)"
        style="fill:#1a62a6;fill-opacity:1;stroke:#648cac;stroke-width:9.7147;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">
       <path
          style="color:#000000;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-variant-east-asian:normal;font-feature-settings:normal;font-variation-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;letter-spacing:normal;word-spacing:normal;text-transform:none;writing-mode:lr-tb;direction:ltr;text-orientation:mixed;dominant-baseline:auto;baseline-shift:baseline;text-anchor:start;white-space:normal;shape-padding:0;shape-margin:0;inline-size:0;clip-rule:nonzero;display:inline;overflow:visible;visibility:visible;opacity:1;isolation:auto;mix-blend-mode:normal;color-interpolation:sRGB;color-interpolation-filters:linearRGB;solid-color:#000000;solid-opacity:1;vector-effect:none;fill:#1a62a6;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:9.7147;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;color-rendering:auto;image-rendering:auto;shape-rendering:auto;text-rendering:auto;enable-background:accumulate;stop-color:#000000;stop-opacity:1"

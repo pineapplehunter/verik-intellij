@@ -14,14 +14,20 @@
  * limitations under the License.
  */
 
-package io.verik.intellij.services
+package io.verik.intellij.highlight
 
-import com.intellij.openapi.project.Project
-import io.verik.intellij.MyBundle
+import com.intellij.lang.Language
 
-class MyProjectService(project: Project) {
+class SystemVerilogLanguage : Language(NAME) {
 
-    init {
-        println(MyBundle.message("projectService", project.name))
+    override fun getDisplayName(): String {
+        return NAME
+    }
+
+    companion object {
+
+        const val NAME = "SystemVerilog"
+
+        val INSTANCE = SystemVerilogLanguage()
     }
 }

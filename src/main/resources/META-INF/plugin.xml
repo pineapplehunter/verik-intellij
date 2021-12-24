@@ -7,12 +7,10 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="io.verik.intellij.services.MyApplicationService"/>
-        <projectService serviceImplementation="io.verik.intellij.services.MyProjectService"/>
+        <fileType name="SystemVerilog"
+                  implementationClass="io.verik.intellij.highlight.SystemVerilogFileType"
+                  fieldName="INSTANCE"
+                  language="SystemVerilog"
+                  extensions="v;vh;sv;svh"/>
     </extensions>
-
-    <applicationListeners>
-        <listener class="io.verik.intellij.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
 </idea-plugin>
