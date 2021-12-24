@@ -6,6 +6,7 @@ import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.TokenType;
 import io.verik.intellij.highlight.SystemVerilogTokenTypes;
+@SuppressWarnings("ALL")
 
 
 /**

@@ -12,6 +12,8 @@ plugins {
     id("org.jetbrains.intellij") version "1.3.0"
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "1.3.1"
+    // Ktlint Plugin
+    id("org.jlleitschuh.gradle.ktlint") version "10.2.0"
 }
 
 group = properties("pluginGroup")
@@ -79,11 +81,13 @@ tasks {
         )
 
         // Get the latest available change notes from the changelog file
-        changeNotes.set(provider {
-            changelog.run {
-                getOrNull(properties("pluginVersion")) ?: getLatest()
-            }.toHTML()
-        })
+        changeNotes.set(
+            provider {
+                changelog.run {
+                    getOrNull(properties("pluginVersion")) ?: getLatest()
+                }.toHTML()
+            }
+        )
     }
 
     signPlugin {
