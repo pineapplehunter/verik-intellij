@@ -12,5 +12,7 @@
                   fieldName="INSTANCE"
                   language="SystemVerilog"
                   extensions="v;vh;sv;svh"/>
+        <lang.syntaxHighlighterFactory language="SystemVerilog"
+                                       implementationClass="io.verik.intellij.highlight.SystemVerilogHighlighterFactory"/>
     </extensions>
 </idea-plugin>

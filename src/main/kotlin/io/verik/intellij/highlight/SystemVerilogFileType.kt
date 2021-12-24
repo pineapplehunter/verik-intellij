@@ -27,7 +27,7 @@ class SystemVerilogFileType : LanguageFileType(SystemVerilogLanguage.INSTANCE) {
     }
 
     override fun getDescription(): String {
-        return "${SystemVerilogLanguage.NAME} file"
+        return SystemVerilogLanguage.NAME
     }
 
     override fun getDefaultExtension(): String {
