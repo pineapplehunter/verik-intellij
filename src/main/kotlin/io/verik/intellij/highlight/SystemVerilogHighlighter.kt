@@ -33,6 +33,8 @@ class SystemVerilogHighlighter : SyntaxHighlighterBase() {
 
     override fun getTokenHighlights(tokenType: IElementType?): Array<TextAttributesKey> {
         return when (tokenType) {
+            is SystemVerilogTokenTypes.CommentTokenType -> COMMENT_KEYS
+            SystemVerilogTokenTypes.STRING -> STRING_KEYS
             is SystemVerilogTokenTypes.KeywordTokenType -> KEYWORD_KEYS
             TokenType.BAD_CHARACTER -> BAD_CHARACTER_KEYS
             else -> EMPTY_KEYS
@@ -41,8 +43,15 @@ class SystemVerilogHighlighter : SyntaxHighlighterBase() {
 
     companion object {
 
-        val KEYWORD_KEYS = arrayOf(createTextAttributesKey("KEYWORD", DefaultLanguageHighlighterColors.KEYWORD))
-        val BAD_CHARACTER_KEYS = arrayOf(createTextAttributesKey("BAD_CHARACTER"))
-        val EMPTY_KEYS = arrayOf<TextAttributesKey>()
+        val COMMENT_KEYS =
+            arrayOf(createTextAttributesKey("LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT))
+        val STRING_KEYS =
+            arrayOf(createTextAttributesKey("STRING", DefaultLanguageHighlighterColors.STRING))
+        val KEYWORD_KEYS =
+            arrayOf(createTextAttributesKey("KEYWORD", DefaultLanguageHighlighterColors.KEYWORD))
+        val BAD_CHARACTER_KEYS =
+            arrayOf(createTextAttributesKey("BAD_CHARACTER"))
+        val EMPTY_KEYS =
+            arrayOf<TextAttributesKey>()
     }
 }

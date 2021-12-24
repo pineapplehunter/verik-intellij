@@ -37,25 +37,26 @@ class SystemVerilogLexer implements FlexLexer {
 
   /** 
    * Translates characters to character classes
-   * Chosen bits are [8, 6, 7]
-   * Total runtime size is 1040 bytes
+   * Chosen bits are [9, 6, 6]
+   * Total runtime size is 1568 bytes
    */
   public static int ZZ_CMAP(int ch) {
-    return ZZ_CMAP_A[ZZ_CMAP_Y[ZZ_CMAP_Z[ch>>13]|((ch>>7)&0x3f)]|(ch&0x7f)];
+    return ZZ_CMAP_A[(ZZ_CMAP_Y[ZZ_CMAP_Z[ch>>12]|((ch>>6)&0x3f)]<<6)|(ch&0x3f)];
   }
 
-  /* The ZZ_CMAP_Z table has 136 entries */
+  /* The ZZ_CMAP_Z table has 272 entries */
   static final char ZZ_CMAP_Z[] = zzUnpackCMap(
-    "\1\0\207\100");
+    "\1\0\1\100\1\200\u010d\100");
 
-  /* The ZZ_CMAP_Y table has 128 entries */
+  /* The ZZ_CMAP_Y table has 192 entries */
   static final char ZZ_CMAP_Y[] = zzUnpackCMap(
-    "\1\0\177\200");
+    "\1\0\1\1\1\2\175\3\1\4\77\3");
 
-  /* The ZZ_CMAP_A table has 256 entries */
+  /* The ZZ_CMAP_A table has 320 entries */
   static final char ZZ_CMAP_A[] = zzUnpackCMap(
-    "\11\0\2\1\1\0\1\1\23\0\1\1\61\0\1\1\21\0\1\4\1\7\6\0\1\6\1\2\1\0\1\3\5\0\1"+
-    "\5\212\0");
+    "\11\0\1\1\1\7\1\13\1\14\1\7\22\0\1\1\1\0\1\11\5\0\1\4\1\5\1\10\4\0\1\6\54"+
+    "\0\1\12\2\0\1\3\1\2\3\0\1\17\1\22\6\0\1\21\1\15\1\0\1\16\5\0\1\20\17\0\1\13"+
+    "\242\0\2\13\26\0");
 
   /** 
    * Translates DFA states to action switch labels.
@@ -63,10 +64,11 @@ class SystemVerilogLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\1\1\4\0\1\3";
+    "\1\0\1\1\1\2\4\1\1\0\1\3\2\0\1\4"+
+    "\5\0\1\5\1\6\2\0\1\7";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[9];
+    int [] result = new int[22];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -91,11 +93,12 @@ class SystemVerilogLexer implements FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\10\0\20\0\30\0\40\0\50\0\60\0\70"+
-    "\0\10";
+    "\0\0\0\23\0\23\0\46\0\71\0\114\0\137\0\162"+
+    "\0\205\0\230\0\114\0\23\0\253\0\276\0\321\0\344"+
+    "\0\367\0\23\0\23\0\u010a\0\u011d\0\23";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[9];
+    int [] result = new int[22];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -118,11 +121,16 @@ class SystemVerilogLexer implements FlexLexer {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\1\3\1\4\5\2\11\0\1\3\11\0\1\5"+
-    "\10\0\1\6\10\0\1\7\10\0\1\10\10\0\1\11";
+    "\1\2\1\3\1\4\3\2\1\5\1\3\1\2\1\6"+
+    "\2\2\1\3\1\7\5\2\26\0\1\10\25\0\1\11"+
+    "\1\0\1\12\12\0\11\13\1\14\1\15\10\13\16\0"+
+    "\1\16\10\0\1\17\16\0\7\11\1\0\13\11\10\12"+
+    "\1\20\12\12\7\13\1\0\3\13\2\0\6\13\17\0"+
+    "\1\21\3\0\5\17\1\22\15\17\6\12\1\23\1\12"+
+    "\1\20\12\12\20\0\1\24\23\0\1\25\23\0\1\26";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[64];
+    int [] result = new int[304];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -160,10 +168,11 @@ class SystemVerilogLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\2\1\4\0\1\11";
+    "\1\0\2\11\4\1\1\0\1\1\2\0\1\11\5\0"+
+    "\2\11\2\0\1\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[9];
+    int [] result = new int[22];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -480,17 +489,37 @@ class SystemVerilogLexer implements FlexLexer {
             { return TokenType.BAD_CHARACTER;
             } 
             // fall through
-          case 4: break;
+          case 8: break;
           case 2: 
             { return TokenType.WHITE_SPACE;
             } 
             // fall through
-          case 5: break;
+          case 9: break;
           case 3: 
+            { return SystemVerilogTokenTypes.LINE_COMMENT;
+            } 
+            // fall through
+          case 10: break;
+          case 4: 
+            { return SystemVerilogTokenTypes.STRING;
+            } 
+            // fall through
+          case 11: break;
+          case 5: 
+            { return SystemVerilogTokenTypes.LABEL_COMMENT;
+            } 
+            // fall through
+          case 12: break;
+          case 6: 
+            { return SystemVerilogTokenTypes.BLOCK_COMMENT;
+            } 
+            // fall through
+          case 13: break;
+          case 7: 
             { return SystemVerilogTokenTypes.MODULE;
             } 
             // fall through
-          case 6: break;
+          case 14: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

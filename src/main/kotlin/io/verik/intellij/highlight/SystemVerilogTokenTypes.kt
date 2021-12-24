@@ -20,8 +20,15 @@ import com.intellij.psi.tree.IElementType
 
 object SystemVerilogTokenTypes {
 
-    @JvmField
-    val MODULE = KeywordTokenType("module")
+    @JvmField val LABEL_COMMENT = CommentTokenType("labelComment")
+    @JvmField val LINE_COMMENT = CommentTokenType("lineComment")
+    @JvmField val BLOCK_COMMENT = CommentTokenType("blockComment")
+
+    @JvmField val STRING = IElementType("string", SystemVerilogLanguage.INSTANCE)
+
+    @JvmField val MODULE = KeywordTokenType("module")
+
+    class CommentTokenType(debugName: String) : IElementType(debugName, SystemVerilogLanguage.INSTANCE)
 
     class KeywordTokenType(debugName: String) : IElementType(debugName, SystemVerilogLanguage.INSTANCE)
 }

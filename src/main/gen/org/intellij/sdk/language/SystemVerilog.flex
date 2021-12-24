@@ -16,13 +16,28 @@ import io.verik.intellij.highlight.SystemVerilogTokenTypes;
 %eof{  return;
 %eof}
 
-WHITE_SPACE=[\R\ \n\t\f]
-MODULE="module"
+WHITE_SPACE = [ \n\r\t\f]
+
+LABEL_COMMENT = "`_(" [^)]* ")"
+LINE_COMMENT = "//" [^\r\n]*
+BLOCK_COMMENT = "/*" ([^*] | (\*+[^*/]))* \*+"/"
+
+STRING = \"([^\\\"]|\\.)*\"
+
+MODULE = "module"
 
 %%
 
-<YYINITIAL> {MODULE}                                       { return SystemVerilogTokenTypes.MODULE; }
+{WHITE_SPACE}                                              { return TokenType.WHITE_SPACE; }
 
-{WHITE_SPACE}+                                             { return TokenType.WHITE_SPACE; }
+{LABEL_COMMENT}                                            { return SystemVerilogTokenTypes.LABEL_COMMENT; }
+
+{LINE_COMMENT}                                             { return SystemVerilogTokenTypes.LINE_COMMENT; }
+
+{BLOCK_COMMENT}                                            { return SystemVerilogTokenTypes.BLOCK_COMMENT; }
+
+{STRING}                                                   { return SystemVerilogTokenTypes.STRING; }
+
+{MODULE}                                                   { return SystemVerilogTokenTypes.MODULE; }
 
 [^]                                                        { return TokenType.BAD_CHARACTER; }
