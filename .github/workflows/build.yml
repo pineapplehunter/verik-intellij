@@ -43,6 +43,10 @@ jobs:
           java-version: 11
           cache: gradle
 
+      # Build plugin
+      - name: Build Plugin
+        run: ./gradlew buildPlugin
+
       # Set environment variables
       - name: Export Properties
         id: properties
