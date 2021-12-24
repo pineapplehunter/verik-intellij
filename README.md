@@ -5,6 +5,5 @@
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
 
 <!-- Plugin description -->
-[Verik](https://verik.io) is a hardware description language that compiles transparently to SystemVerilog. The Verik
-plugin provides inspections and SystemVerilog syntax highlighting.
+The [Verik](https://verik.io) plugin provides inspections and SystemVerilog syntax highlighting.
 <!-- Plugin description end -->
