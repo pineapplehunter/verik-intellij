@@ -2,7 +2,7 @@
 
 ## [Unreleased]
 ### Added
-- Syntax highlighting for SystemVerilog keywords.
+- Syntax highlighting for SystemVerilog.
 
 ## [0.1.0]
 ### Added

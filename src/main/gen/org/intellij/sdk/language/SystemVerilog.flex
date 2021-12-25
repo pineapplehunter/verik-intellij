@@ -23,10 +23,6 @@ LINE_COMMENT = \/\/ [^\n\r]*
 BLOCK_COMMENT = \/\* ([^\*] | (\*+[^\/]))* \*+\/
 ATTRIBUTE = \(\* ([^\*] | (\*+[^\/]))* \*+\)
 
-DIRECTIVE = (\`__FILE__ | \`__LINE__ | \`begin_keywords | \`celldefine | \`default_nettype | \`define | \`else |
-\`elsif | \`end_keywords | \`endcelldefine | \`endif | \`ifdef | \`ifndef | \`include | \`line | \`nounconnected_drive |
-\`pragma | \`resetall | \`timescale | \`unconnected_drive | \`undef | \`undefineall)
-
 KEYWORD = ("module" | "accept_on" | "alias" | "always" | "always_comb" | "always_ff" | "always_latch" | "and" |
     "assert" | "assign" | "assume" | "automatic" | "before" | "begin" | "bind" | "bins" | "binsof" | "bit" | "break" |
     "buf" | "bufif0" | "bufif1" | "byte" | "case" | "casex" | "casez" | "cell" | "chandle" | "checker" | "class" |
@@ -37,7 +33,7 @@ KEYWORD = ("module" | "accept_on" | "alias" | "always" | "always_comb" | "always
     "endproperty" | "endspecify" | "endsequence" | "endtable" | "endtask" | "enum" | "event" | "eventually" | "expect" |
     "export" | "extends" | "extern" | "final" | "first_match" | "for" | "force" | "foreach" | "forever" | "fork" |
     "forkjoin" | "function" | "generate" | "genvar" | "global" | "highz0" | "highz1" | "if" | "iff" | "ifnone" |
-    "ignore_bins" | "illegal_bins" | "implements" | "implies" | "import" "incdir" | "include" | "initial" "inout" |
+    "ignore_bins" | "illegal_bins" | "implements" | "implies" | "import" "incdir" | "include" | "initial" | "inout" |
     "input" | "inside" "instance" | "int" | "integer" "interconnect" | "interface" | "intersect" | "join" "join_any" |
     "join_none" | "large" | "let" | "liblist" | "library" | "local" | "localparam" | "logic" | "longint" |
     "macromodule" | "matches" | "medium" | "modport" | "module" | "nand" | "negedge" | "nettype" | "new" | "nexttime" |
@@ -55,13 +51,33 @@ KEYWORD = ("module" | "accept_on" | "alias" | "always" | "always_comb" | "always
     "vectored" | "virtual" | "void" | "wait" | "wait_order" | "wand" | "weak" | "weak0" | "weak1" | "while" |
     "wildcard" | "wire" | "with" | "within" | "wor" | "xnor" | "xor")
 
+DIRECTIVE = \`[a-zA-Z_$][a-zA-Z0-9_$]*
+
 IDENTIFIER = [a-zA-Z_$][a-zA-Z0-9_$]*
+
+UNSIGNED_LITERAL = [0-9][0-9_]*
+
+DECIMAL_LITERAL = {UNSIGNED_LITERAL}? \' [sS]? [dD] ({UNSIGNED_LITERAL} | [xX]_* | [zZ]_*)
+
+BINARY_LITERAL = {UNSIGNED_LITERAL}? \' [sS]? [bB] [01xXzZ][01xXzZ_]*
+
+OCTAL_LITERAL = {UNSIGNED_LITERAL}? \' [sS]? [oO] [0-7xXzZ][0-7xXzZ_]*
+
+HEX_LITERAL = {UNSIGNED_LITERAL}? \' [sS]? [hH] [0-9a-fA-FxXzZ][0-9a-fA-FxXzZ_]*
+
+TIME_LITERAL = ({UNSIGNED_LITERAL} | {FIXED_POINT_LITERAL}) [munpf]* s
+
+REAL_LITERAL = {UNSIGNED_LITERAL} (\. {UNSIGNED_LITERAL})? [eE][+-]? {UNSIGNED_LITERAL}
+
+FIXED_POINT_LITERAL = {UNSIGNED_LITERAL} \. {UNSIGNED_LITERAL}
+
+UNSIZED_LITERAL = "'" [01xXzZ]
 
 SEMICOLON = ;
 
-PUNCTUATION = ("," | "." | "(" | ")" | "[" | "]" | "{" | "}")
+PUNCTUATION = ("," | "." | ":" | "'" | "(" | ")" | "[" | "]" | "{" | "}" | \\)
 
-OPERATOR = ("+" | "-")
+OPERATOR = ("!" | "&" | "|" | "^" | "~" | "<" | ">" | "=" | "+" | "-" | "*" | "%" | "?" | "#" | "/" | "@")
 
 %state STRING
 
@@ -91,11 +107,29 @@ OPERATOR = ("+" | "-")
 
 <STRING> \"                                        { yybegin(YYINITIAL); return SystemVerilogTokenTypes.STRING; }
 
-<YYINITIAL> {DIRECTIVE}                            { return SystemVerilogTokenTypes.DIRECTIVE; }
-
 <YYINITIAL> {KEYWORD}                              { return SystemVerilogTokenTypes.KEYWORD; }
 
+<YYINITIAL> {DIRECTIVE}                            { return SystemVerilogTokenTypes.DIRECTIVE; }
+
 <YYINITIAL> {IDENTIFIER}                           { return SystemVerilogTokenTypes.IDENTIFIER; }
+
+<YYINITIAL> {UNSIGNED_LITERAL}                     { return SystemVerilogTokenTypes.UNSIGNED_LITERAL; }
+
+<YYINITIAL> {DECIMAL_LITERAL}                      { return SystemVerilogTokenTypes.DECIMAL_LITERAL; }
+
+<YYINITIAL> {BINARY_LITERAL}                       { return SystemVerilogTokenTypes.BINARY_LITERAL; }
+
+<YYINITIAL> {OCTAL_LITERAL}                        { return SystemVerilogTokenTypes.OCTAL_LITERAL; }
+
+<YYINITIAL> {HEX_LITERAL}                          { return SystemVerilogTokenTypes.HEX_LITERAL; }
+
+<YYINITIAL> {TIME_LITERAL}                         { return SystemVerilogTokenTypes.TIME_LITERAL; }
+
+<YYINITIAL> {REAL_LITERAL}                         { return SystemVerilogTokenTypes.REAL_LITERAL; }
+
+<YYINITIAL> {FIXED_POINT_LITERAL}                  { return SystemVerilogTokenTypes.FIXED_POINT_LITERAL; }
+
+<YYINITIAL> {UNSIZED_LITERAL}                      { return SystemVerilogTokenTypes.UNSIZED_LITERAL; }
 
 <YYINITIAL> {SEMICOLON}                            { return SystemVerilogTokenTypes.SEMICOLON; }
 

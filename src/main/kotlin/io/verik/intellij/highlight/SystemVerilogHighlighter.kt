@@ -41,9 +41,18 @@ class SystemVerilogHighlighter : SyntaxHighlighterBase() {
             SystemVerilogTokenTypes.STRING -> KotlinHighlightingColors.STRING
             SystemVerilogTokenTypes.VALID_STRING_ESCAPE -> KotlinHighlightingColors.STRING_ESCAPE
             SystemVerilogTokenTypes.INVALID_STRING_ESCAPE -> KotlinHighlightingColors.INVALID_STRING_ESCAPE
-            SystemVerilogTokenTypes.DIRECTIVE -> KotlinHighlightingColors.ANNOTATION
             SystemVerilogTokenTypes.KEYWORD -> KotlinHighlightingColors.KEYWORD
+            SystemVerilogTokenTypes.DIRECTIVE -> KotlinHighlightingColors.EXTENSION_FUNCTION_CALL
             SystemVerilogTokenTypes.IDENTIFIER -> KotlinHighlightingColors.LOCAL_VARIABLE
+            SystemVerilogTokenTypes.UNSIGNED_LITERAL -> KotlinHighlightingColors.NUMBER
+            SystemVerilogTokenTypes.DECIMAL_LITERAL -> KotlinHighlightingColors.NUMBER
+            SystemVerilogTokenTypes.BINARY_LITERAL -> KotlinHighlightingColors.NUMBER
+            SystemVerilogTokenTypes.OCTAL_LITERAL -> KotlinHighlightingColors.NUMBER
+            SystemVerilogTokenTypes.HEX_LITERAL -> KotlinHighlightingColors.NUMBER
+            SystemVerilogTokenTypes.TIME_LITERAL -> KotlinHighlightingColors.NUMBER
+            SystemVerilogTokenTypes.REAL_LITERAL -> KotlinHighlightingColors.NUMBER
+            SystemVerilogTokenTypes.FIXED_POINT_LITERAL -> KotlinHighlightingColors.NUMBER
+            SystemVerilogTokenTypes.UNSIZED_LITERAL -> KotlinHighlightingColors.NUMBER
             SystemVerilogTokenTypes.SEMICOLON -> KotlinHighlightingColors.SEMICOLON
             SystemVerilogTokenTypes.PUNCTUATION -> KotlinHighlightingColors.DOT
             SystemVerilogTokenTypes.OPERATOR -> KotlinHighlightingColors.OPERATOR_SIGN
