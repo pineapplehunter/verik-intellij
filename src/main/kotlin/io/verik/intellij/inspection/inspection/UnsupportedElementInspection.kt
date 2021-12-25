@@ -20,6 +20,7 @@ import com.intellij.codeHighlighting.HighlightDisplayLevel
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.psi.PsiElementVisitor
 import io.verik.intellij.inspection.common.AbstractVerikInspection
+import io.verik.intellij.inspection.common.InspectionUtil
 import org.jetbrains.kotlin.psi.KtClassLiteralExpression
 import org.jetbrains.kotlin.psi.KtDestructuringDeclaration
 import org.jetbrains.kotlin.psi.KtDoubleColonExpression
@@ -51,7 +52,9 @@ class UnsupportedElementInspection : AbstractVerikInspection() {
     }
 
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
-        return UnsupportedElementVisitor(holder)
+        return if (InspectionUtil.isEnabled(holder)) {
+            UnsupportedElementVisitor(holder)
+        } else InspectionUtil.NULL_VISITOR
     }
 
     private class UnsupportedElementVisitor(

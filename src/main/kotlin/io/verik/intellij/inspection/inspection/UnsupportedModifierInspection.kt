@@ -20,6 +20,7 @@ import com.intellij.codeHighlighting.HighlightDisplayLevel
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.psi.PsiElementVisitor
 import io.verik.intellij.inspection.common.AbstractVerikInspection
+import io.verik.intellij.inspection.common.InspectionUtil
 import org.jetbrains.kotlin.lexer.KtTokens
 import org.jetbrains.kotlin.psi.modifierListVisitor
 
@@ -58,7 +59,7 @@ class UnsupportedModifierInspection : AbstractVerikInspection() {
     }
 
     override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
-        return modifierListVisitor { modifierList ->
+        val visitor = modifierListVisitor { modifierList ->
             unsupportedModifiers.forEach {
                 if (modifierList.hasModifier(it)) {
                     val modifier = modifierList.getModifier(it)!!
@@ -66,5 +67,8 @@ class UnsupportedModifierInspection : AbstractVerikInspection() {
                 }
             }
         }
+        return if (InspectionUtil.isEnabled(holder)) {
+            visitor
+        } else InspectionUtil.NULL_VISITOR
     }
 }
