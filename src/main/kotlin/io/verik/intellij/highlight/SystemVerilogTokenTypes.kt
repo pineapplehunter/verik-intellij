@@ -21,10 +21,17 @@ object SystemVerilogTokenTypes {
     @JvmField val LABEL_COMMENT = SystemVerilogTokenType("labelComment")
     @JvmField val LINE_COMMENT = SystemVerilogTokenType("lineComment")
     @JvmField val BLOCK_COMMENT = SystemVerilogTokenType("blockComment")
+    @JvmField val ATTRIBUTE = SystemVerilogTokenType("attribute")
 
     @JvmField val STRING = SystemVerilogTokenType("string")
     @JvmField val VALID_STRING_ESCAPE = SystemVerilogTokenType("validStringEscape")
     @JvmField val INVALID_STRING_ESCAPE = SystemVerilogTokenType("invalidStringEscape")
 
-    @JvmField val MODULE = SystemVerilogTokenType("module")
+    @JvmField val DIRECTIVE = SystemVerilogTokenType("directive")
+    @JvmField val KEYWORD = SystemVerilogTokenType("keyword")
+
+    @JvmField val IDENTIFIER = SystemVerilogTokenType("identifier")
+    @JvmField val SEMICOLON = SystemVerilogTokenType("semicolon")
+    @JvmField val PUNCTUATION = SystemVerilogTokenType("punctuation")
+    @JvmField val OPERATOR = SystemVerilogTokenType("operator")
 }

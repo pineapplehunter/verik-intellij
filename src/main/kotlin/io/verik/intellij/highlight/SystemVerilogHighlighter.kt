@@ -17,13 +17,12 @@
 package io.verik.intellij.highlight
 
 import com.intellij.lexer.Lexer
-import com.intellij.openapi.editor.DefaultLanguageHighlighterColors
 import com.intellij.openapi.editor.colors.TextAttributesKey
-import com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.IElementType
 import org.intellij.sdk.language.SystemVerilogLexerAdapter
+import org.jetbrains.kotlin.idea.highlighter.KotlinHighlightingColors
 
 class SystemVerilogHighlighter : SyntaxHighlighterBase() {
 
@@ -32,39 +31,26 @@ class SystemVerilogHighlighter : SyntaxHighlighterBase() {
     }
 
     override fun getTokenHighlights(tokenType: IElementType?): Array<TextAttributesKey> {
-        return when (tokenType) {
-            SystemVerilogTokenTypes.LABEL_COMMENT -> COMMENT_KEYS
-            SystemVerilogTokenTypes.LINE_COMMENT -> COMMENT_KEYS
-            SystemVerilogTokenTypes.BLOCK_COMMENT -> COMMENT_KEYS
-            SystemVerilogTokenTypes.STRING -> STRING_KEYS
-            SystemVerilogTokenTypes.VALID_STRING_ESCAPE -> VALID_STRING_ESCAPE_KEYS
-            SystemVerilogTokenTypes.INVALID_STRING_ESCAPE -> INVALID_STRING_ESCAPE_KEYS
-            SystemVerilogTokenTypes.MODULE -> KEYWORD_KEYS
-            TokenType.BAD_CHARACTER -> BAD_CHARACTER_KEYS
-            else -> EMPTY_KEYS
+        @Suppress("MISSING_DEPENDENCY_CLASS")
+        val textAttributesKey : TextAttributesKey? = when (tokenType) {
+            TokenType.WHITE_SPACE -> null
+            SystemVerilogTokenTypes.LABEL_COMMENT -> KotlinHighlightingColors.LINE_COMMENT
+            SystemVerilogTokenTypes.LINE_COMMENT -> KotlinHighlightingColors.LINE_COMMENT
+            SystemVerilogTokenTypes.BLOCK_COMMENT -> KotlinHighlightingColors.BLOCK_COMMENT
+            SystemVerilogTokenTypes.ATTRIBUTE -> KotlinHighlightingColors.ANNOTATION
+            SystemVerilogTokenTypes.STRING -> KotlinHighlightingColors.STRING
+            SystemVerilogTokenTypes.VALID_STRING_ESCAPE -> KotlinHighlightingColors.STRING_ESCAPE
+            SystemVerilogTokenTypes.INVALID_STRING_ESCAPE -> KotlinHighlightingColors.INVALID_STRING_ESCAPE
+            SystemVerilogTokenTypes.DIRECTIVE -> KotlinHighlightingColors.ANNOTATION
+            SystemVerilogTokenTypes.KEYWORD -> KotlinHighlightingColors.KEYWORD
+            SystemVerilogTokenTypes.IDENTIFIER -> KotlinHighlightingColors.LOCAL_VARIABLE
+            SystemVerilogTokenTypes.SEMICOLON -> KotlinHighlightingColors.SEMICOLON
+            SystemVerilogTokenTypes.PUNCTUATION -> KotlinHighlightingColors.DOT
+            SystemVerilogTokenTypes.OPERATOR -> KotlinHighlightingColors.OPERATOR_SIGN
+            else -> KotlinHighlightingColors.BAD_CHARACTER
         }
-    }
-
-    companion object {
-
-        val COMMENT_KEYS = arrayOf(
-            createTextAttributesKey("LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
-        )
-        val STRING_KEYS = arrayOf(
-            createTextAttributesKey("STRING", DefaultLanguageHighlighterColors.STRING)
-        )
-        val VALID_STRING_ESCAPE_KEYS = arrayOf(
-            createTextAttributesKey("VALID_STRING_ESCAPE", DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE)
-        )
-        val INVALID_STRING_ESCAPE_KEYS = arrayOf(
-            createTextAttributesKey("INVALID_STRING_ESCAPE", DefaultLanguageHighlighterColors.INVALID_STRING_ESCAPE)
-        )
-        val KEYWORD_KEYS = arrayOf(
-            createTextAttributesKey("KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
-        )
-        val BAD_CHARACTER_KEYS = arrayOf(
-            createTextAttributesKey("BAD_CHARACTER")
-        )
-        val EMPTY_KEYS = arrayOf<TextAttributesKey>()
+        return if (textAttributesKey != null) {
+            arrayOf(textAttributesKey)
+        } else arrayOf()
     }
 }

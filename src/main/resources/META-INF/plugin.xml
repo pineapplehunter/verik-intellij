@@ -5,6 +5,7 @@
     <vendor>Verik</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.kotlin</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <fileType name="SystemVerilog"
