@@ -31,8 +31,7 @@ class SystemVerilogHighlighter : SyntaxHighlighterBase() {
     }
 
     override fun getTokenHighlights(tokenType: IElementType?): Array<TextAttributesKey> {
-        @Suppress("MISSING_DEPENDENCY_CLASS")
-        val textAttributesKey : TextAttributesKey? = when (tokenType) {
+        val textAttributesKey = when (tokenType) {
             TokenType.WHITE_SPACE -> null
             SystemVerilogTokenTypes.LABEL_COMMENT -> KotlinHighlightingColors.LINE_COMMENT
             SystemVerilogTokenTypes.LINE_COMMENT -> KotlinHighlightingColors.LINE_COMMENT
