@@ -43,7 +43,7 @@ class UnsupportedModifierInspection : AbstractVerikInspection() {
     )
 
     override fun getID(): String {
-        return "VerikModifierException"
+        return "VerikUnsupportedModifier"
     }
 
     override fun getDisplayName(): String {
