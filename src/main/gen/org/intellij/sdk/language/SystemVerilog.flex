@@ -18,26 +18,38 @@ import io.verik.intellij.highlight.SystemVerilogTokenTypes;
 
 WHITE_SPACE = [ \n\r\t\f]
 
-LABEL_COMMENT = "`_(" [^)]* ")"
-LINE_COMMENT = "//" [^\r\n]*
-BLOCK_COMMENT = "/*" ([^*] | (\*+[^*/]))* \*+"/"
-
-STRING = \"([^\\\"]|\\.)*\"
+LABEL_COMMENT = `_\( [^\)]* \)
+LINE_COMMENT = \/\/ [^\n\r]*
+BLOCK_COMMENT = \/\* ([^\*] | (\*+[^\/]))* \*+\/
 
 MODULE = "module"
 
+%state STRING
+
 %%
 
-{WHITE_SPACE}                                              { return TokenType.WHITE_SPACE; }
+<YYINITIAL> {WHITE_SPACE}                          { return TokenType.WHITE_SPACE; }
 
-{LABEL_COMMENT}                                            { return SystemVerilogTokenTypes.LABEL_COMMENT; }
+<YYINITIAL> {LABEL_COMMENT}                        { return SystemVerilogTokenTypes.LABEL_COMMENT; }
 
-{LINE_COMMENT}                                             { return SystemVerilogTokenTypes.LINE_COMMENT; }
+<YYINITIAL> {LINE_COMMENT}                         { return SystemVerilogTokenTypes.LINE_COMMENT; }
 
-{BLOCK_COMMENT}                                            { return SystemVerilogTokenTypes.BLOCK_COMMENT; }
+<YYINITIAL> {BLOCK_COMMENT}                        { return SystemVerilogTokenTypes.BLOCK_COMMENT; }
 
-{STRING}                                                   { return SystemVerilogTokenTypes.STRING; }
+<YYINITIAL> \"                                     { yybegin(STRING); return SystemVerilogTokenTypes.STRING; }
 
-{MODULE}                                                   { return SystemVerilogTokenTypes.MODULE; }
+<STRING> \\ [nt\\\"vfa]                            { return SystemVerilogTokenTypes.VALID_STRING_ESCAPE; }
 
-[^]                                                        { return TokenType.BAD_CHARACTER; }
+<STRING> \\ [0-7]{1,3}                             { return SystemVerilogTokenTypes.VALID_STRING_ESCAPE; }
+
+<STRING> \\x [0-9a-fA-F]{1,2}                      { return SystemVerilogTokenTypes.VALID_STRING_ESCAPE; }
+
+<STRING> \\ [^\n\r]                                { return SystemVerilogTokenTypes.INVALID_STRING_ESCAPE; }
+
+<STRING> [^\n\r\"\\]+                              { return SystemVerilogTokenTypes.STRING; }
+
+<STRING> \"                                        { yybegin(YYINITIAL); return SystemVerilogTokenTypes.STRING; }
+
+<YYINITIAL> {MODULE}                               { return SystemVerilogTokenTypes.MODULE; }
+
+[^]                                                { return TokenType.BAD_CHARACTER; }

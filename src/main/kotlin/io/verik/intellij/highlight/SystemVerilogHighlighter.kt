@@ -33,9 +33,13 @@ class SystemVerilogHighlighter : SyntaxHighlighterBase() {
 
     override fun getTokenHighlights(tokenType: IElementType?): Array<TextAttributesKey> {
         return when (tokenType) {
-            is SystemVerilogTokenTypes.CommentTokenType -> COMMENT_KEYS
+            SystemVerilogTokenTypes.LABEL_COMMENT -> COMMENT_KEYS
+            SystemVerilogTokenTypes.LINE_COMMENT -> COMMENT_KEYS
+            SystemVerilogTokenTypes.BLOCK_COMMENT -> COMMENT_KEYS
             SystemVerilogTokenTypes.STRING -> STRING_KEYS
-            is SystemVerilogTokenTypes.KeywordTokenType -> KEYWORD_KEYS
+            SystemVerilogTokenTypes.VALID_STRING_ESCAPE -> VALID_STRING_ESCAPE_KEYS
+            SystemVerilogTokenTypes.INVALID_STRING_ESCAPE -> INVALID_STRING_ESCAPE_KEYS
+            SystemVerilogTokenTypes.MODULE -> KEYWORD_KEYS
             TokenType.BAD_CHARACTER -> BAD_CHARACTER_KEYS
             else -> EMPTY_KEYS
         }
@@ -43,15 +47,24 @@ class SystemVerilogHighlighter : SyntaxHighlighterBase() {
 
     companion object {
 
-        val COMMENT_KEYS =
-            arrayOf(createTextAttributesKey("LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT))
-        val STRING_KEYS =
-            arrayOf(createTextAttributesKey("STRING", DefaultLanguageHighlighterColors.STRING))
-        val KEYWORD_KEYS =
-            arrayOf(createTextAttributesKey("KEYWORD", DefaultLanguageHighlighterColors.KEYWORD))
-        val BAD_CHARACTER_KEYS =
-            arrayOf(createTextAttributesKey("BAD_CHARACTER"))
-        val EMPTY_KEYS =
-            arrayOf<TextAttributesKey>()
+        val COMMENT_KEYS = arrayOf(
+            createTextAttributesKey("LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT)
+        )
+        val STRING_KEYS = arrayOf(
+            createTextAttributesKey("STRING", DefaultLanguageHighlighterColors.STRING)
+        )
+        val VALID_STRING_ESCAPE_KEYS = arrayOf(
+            createTextAttributesKey("VALID_STRING_ESCAPE", DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE)
+        )
+        val INVALID_STRING_ESCAPE_KEYS = arrayOf(
+            createTextAttributesKey("INVALID_STRING_ESCAPE", DefaultLanguageHighlighterColors.INVALID_STRING_ESCAPE)
+        )
+        val KEYWORD_KEYS = arrayOf(
+            createTextAttributesKey("KEYWORD", DefaultLanguageHighlighterColors.KEYWORD)
+        )
+        val BAD_CHARACTER_KEYS = arrayOf(
+            createTextAttributesKey("BAD_CHARACTER")
+        )
+        val EMPTY_KEYS = arrayOf<TextAttributesKey>()
     }
 }

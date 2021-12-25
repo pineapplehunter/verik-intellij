@@ -16,15 +16,6 @@
 
 package io.verik.intellij.highlight
 
-object SystemVerilogTokenTypes {
+import com.intellij.psi.tree.IElementType
 
-    @JvmField val LABEL_COMMENT = SystemVerilogTokenType("labelComment")
-    @JvmField val LINE_COMMENT = SystemVerilogTokenType("lineComment")
-    @JvmField val BLOCK_COMMENT = SystemVerilogTokenType("blockComment")
-
-    @JvmField val STRING = SystemVerilogTokenType("string")
-    @JvmField val VALID_STRING_ESCAPE = SystemVerilogTokenType("validStringEscape")
-    @JvmField val INVALID_STRING_ESCAPE = SystemVerilogTokenType("invalidStringEscape")
-
-    @JvmField val MODULE = SystemVerilogTokenType("module")
-}
+class SystemVerilogTokenType(debugName: String) : IElementType(debugName, SystemVerilogLanguage.INSTANCE)
