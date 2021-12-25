@@ -13,7 +13,9 @@
                   fieldName="INSTANCE"
                   language="SystemVerilog"
                   extensions="v;vh;sv;svh"/>
-        <lang.syntaxHighlighterFactory language="SystemVerilog"
-                                       implementationClass="io.verik.intellij.highlight.SystemVerilogHighlighterFactory"/>
+        <lang.syntaxHighlighterFactory
+                language="SystemVerilog"
+                implementationClass="io.verik.intellij.highlight.SystemVerilogHighlighterFactory"/>
+        <inspectionToolProvider implementation="io.verik.intellij.inspection.common.VerikInspectionProvider"/>
     </extensions>
 </idea-plugin>
