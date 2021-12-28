@@ -20,8 +20,6 @@ WHITE_SPACE = [ \n\r\t\f]
 
 LABEL_COMMENT = `_\( [^\)]* \)
 LINE_COMMENT = \/\/ [^\n\r]*
-BLOCK_COMMENT = \/\* ([^\*] | (\*+[^\/]))* \*+\/
-ATTRIBUTE = \(\* ([^\*] | (\*+[^\/]))* \*+\)
 
 KEYWORD = ("module" | "accept_on" | "alias" | "always" | "always_comb" | "always_ff" | "always_latch" | "and" |
     "assert" | "assign" | "assume" | "automatic" | "before" | "begin" | "bind" | "bins" | "binsof" | "bit" | "break" |
@@ -79,6 +77,10 @@ PUNCTUATION = ("," | "." | ":" | "'" | "(" | ")" | "[" | "]" | "{" | "}" | \\)
 
 OPERATOR = ("!" | "&" | "|" | "^" | "~" | "<" | ">" | "=" | "+" | "-" | "*" | "%" | "?" | "#" | "/" | "@")
 
+%state BLOCK_COMMENT
+
+%state ATTRIBUTE
+
 %state STRING
 
 %%
@@ -89,9 +91,17 @@ OPERATOR = ("!" | "&" | "|" | "^" | "~" | "<" | ">" | "=" | "+" | "-" | "*" | "%
 
 <YYINITIAL> {LINE_COMMENT}                         { return SystemVerilogTokenTypes.LINE_COMMENT; }
 
-<YYINITIAL> {BLOCK_COMMENT}                        { return SystemVerilogTokenTypes.BLOCK_COMMENT; }
+<YYINITIAL> \/\*                                   { yybegin(BLOCK_COMMENT); return SystemVerilogTokenTypes.BLOCK_COMMENT; }
 
-<YYINITIAL> {ATTRIBUTE}                            { return SystemVerilogTokenTypes.ATTRIBUTE; }
+<BLOCK_COMMENT> ([^\*]+ | (\*+[^\/]))              { return SystemVerilogTokenTypes.BLOCK_COMMENT; }
+
+<BLOCK_COMMENT> \*+\/                              { yybegin(YYINITIAL); return SystemVerilogTokenTypes.BLOCK_COMMENT; }
+
+<YYINITIAL> \(\*                                   { yybegin(ATTRIBUTE); return SystemVerilogTokenTypes.ATTRIBUTE; }
+
+<ATTRIBUTE> ([^\*]+ | (\*+[^\)]))                  { return SystemVerilogTokenTypes.ATTRIBUTE; }
+
+<ATTRIBUTE> \*+\)                                  { yybegin(YYINITIAL); return SystemVerilogTokenTypes.ATTRIBUTE; }
 
 <YYINITIAL> \"                                     { yybegin(STRING); return SystemVerilogTokenTypes.STRING; }
 
