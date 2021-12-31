@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Added
 - Top not module inspection.
+- Module not class and not object inspections.
 
 ### Fixed
 - Syntax highlighting for block comments and annotations.
