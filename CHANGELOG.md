@@ -1,6 +1,11 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Top not module inspection.
+
+### Fixed
+- Syntax highlighting for block comments and annotations.
 
 ## [0.1.1]
 ### Added

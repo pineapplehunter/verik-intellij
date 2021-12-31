@@ -20,37 +20,20 @@ import com.intellij.codeHighlighting.HighlightDisplayLevel
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.psi.PsiElementVisitor
 import io.verik.intellij.inspection.common.AbstractVerikInspection
-import org.jetbrains.kotlin.lexer.KtTokens
-import org.jetbrains.kotlin.psi.modifierListVisitor
+import org.jetbrains.kotlin.psi.classOrObjectVisitor
 
-class UnsupportedModifierInspection : AbstractVerikInspection() {
-
-    private val unsupportedModifiers = listOf(
-        KtTokens.ANNOTATION_KEYWORD,
-        KtTokens.CROSSINLINE_KEYWORD,
-        KtTokens.DATA_KEYWORD,
-        KtTokens.EXTERNAL_KEYWORD,
-        KtTokens.IN_KEYWORD,
-        KtTokens.NOINLINE_KEYWORD,
-        KtTokens.OPERATOR_KEYWORD,
-        KtTokens.OUT_KEYWORD,
-        KtTokens.REIFIED_KEYWORD,
-        KtTokens.SEALED_KEYWORD,
-        KtTokens.SUSPEND_KEYWORD,
-        KtTokens.TAILREC_KEYWORD,
-        KtTokens.VARARG_KEYWORD
-    )
+class TopNotModuleInspection : AbstractVerikInspection() {
 
     override fun getID(): String {
-        return "VerikUnsupportedModifier"
+        return "VerikTopNotModule"
     }
 
     override fun getDisplayName(): String {
-        return "Unsupported modifier"
+        return "Top not module"
     }
 
     override fun getStaticDescription(): String {
-        return "Reports modifiers that are not supported by Verik"
+        return "Reports declarations that are annotated as top but are not modules"
     }
 
     override fun getDefaultLevel(): HighlightDisplayLevel {
@@ -58,11 +41,14 @@ class UnsupportedModifierInspection : AbstractVerikInspection() {
     }
 
     override fun buildVisitor(holder: ProblemsHolder): PsiElementVisitor {
-        return modifierListVisitor { modifierList ->
-            unsupportedModifiers.forEach {
-                if (modifierList.hasModifier(it)) {
-                    val modifier = modifierList.getModifier(it)!!
-                    holder.registerProblem(modifier, "Modifier ${modifier.text} not supported")
+        return classOrObjectVisitor { classOrObject ->
+            val isSynthTop = classOrObject.annotationEntries.any { it.shortName.toString() == "SynthTop" }
+            val isSimTop = classOrObject.annotationEntries.any { it.shortName.toString() == "SimTop" }
+            val isModule = classOrObject.superTypeListEntries.any { it.text.removeSuffix("()") == "Module" }
+            if ((isSynthTop || isSimTop) && !isModule) {
+                val declarationKeyword = classOrObject.getDeclarationKeyword()
+                if (declarationKeyword != null) {
+                    holder.registerProblem(declarationKeyword, "Declaration annotated as top must be a module")
                 }
             }
         }
