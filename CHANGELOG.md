@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [0.1.2]
 ### Added
 - Top not module inspection.
 - Module not class and not object inspections.
