@@ -43,14 +43,14 @@ class UnsupportedElementInspection : AbstractVerikInspection() {
     }
 
     override fun getStaticDescription(): String {
-        return "Reports elements that are not supported by Verik"
+        return "Reports elements that are not supported by Verik."
     }
 
     override fun getDefaultLevel(): HighlightDisplayLevel {
         return HighlightDisplayLevel.ERROR
     }
 
-    override fun buildVisitor(holder: ProblemsHolder): PsiElementVisitor {
+    override fun buildEnabledVisitor(holder: ProblemsHolder): PsiElementVisitor {
         return UnsupportedElementVisitor(holder)
     }
 

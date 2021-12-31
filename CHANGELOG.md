@@ -4,6 +4,7 @@
 ### Added
 - Top not module inspection.
 - Module not class and not object inspections.
+- File annotation inspection.
 
 ### Fixed
 - Syntax highlighting for block comments and annotations.

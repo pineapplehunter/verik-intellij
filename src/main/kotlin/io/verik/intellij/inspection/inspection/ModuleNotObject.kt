@@ -33,14 +33,14 @@ class ModuleNotObject : AbstractVerikInspection() {
     }
 
     override fun getStaticDescription(): String {
-        return "Reports modules that should be declared as object but are not"
+        return "Reports modules that should be declared as object but are not."
     }
 
     override fun getDefaultLevel(): HighlightDisplayLevel {
         return HighlightDisplayLevel.ERROR
     }
 
-    override fun buildVisitor(holder: ProblemsHolder): PsiElementVisitor {
+    override fun buildEnabledVisitor(holder: ProblemsHolder): PsiElementVisitor {
         return classOrObjectVisitor { classOrObject ->
             val declarationKeyword = classOrObject.getDeclarationKeyword()
             val isModule = classOrObject.superTypeListEntries.any { it.text.removeSuffix("()") == "Module" }

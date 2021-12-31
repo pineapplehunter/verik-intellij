@@ -33,14 +33,14 @@ class TopNotModuleInspection : AbstractVerikInspection() {
     }
 
     override fun getStaticDescription(): String {
-        return "Reports declarations that are annotated as top but are not modules"
+        return "Reports declarations that are annotated as top but are not modules."
     }
 
     override fun getDefaultLevel(): HighlightDisplayLevel {
         return HighlightDisplayLevel.ERROR
     }
 
-    override fun buildVisitor(holder: ProblemsHolder): PsiElementVisitor {
+    override fun buildEnabledVisitor(holder: ProblemsHolder): PsiElementVisitor {
         return classOrObjectVisitor { classOrObject ->
             val isSynthTop = classOrObject.annotationEntries.any { it.shortName.toString() == "SynthTop" }
             val isSimTop = classOrObject.annotationEntries.any { it.shortName.toString() == "SimTop" }

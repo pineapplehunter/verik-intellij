@@ -50,14 +50,14 @@ class UnsupportedModifierInspection : AbstractVerikInspection() {
     }
 
     override fun getStaticDescription(): String {
-        return "Reports modifiers that are not supported by Verik"
+        return "Reports modifiers that are not supported by Verik."
     }
 
     override fun getDefaultLevel(): HighlightDisplayLevel {
         return HighlightDisplayLevel.ERROR
     }
 
-    override fun buildVisitor(holder: ProblemsHolder): PsiElementVisitor {
+    override fun buildEnabledVisitor(holder: ProblemsHolder): PsiElementVisitor {
         return modifierListVisitor { modifierList ->
             unsupportedModifiers.forEach {
                 if (modifierList.hasModifier(it)) {
