@@ -22,18 +22,18 @@ import com.intellij.psi.PsiElementVisitor
 import io.verik.intellij.inspection.common.AbstractVerikInspection
 import org.jetbrains.kotlin.psi.classOrObjectVisitor
 
-class ModuleNotClass : AbstractVerikInspection() {
+class ModuleNotObjectInspection : AbstractVerikInspection() {
 
     override fun getID(): String {
-        return "VerikModuleNotClass"
+        return "VerikModuleNotObject"
     }
 
     override fun getDisplayName(): String {
-        return "Module not class"
+        return "Module not object"
     }
 
     override fun getStaticDescription(): String {
-        return "Reports modules that should be declared as class but are not."
+        return "Reports modules that should be declared as object but are not."
     }
 
     override fun getDefaultLevel(): HighlightDisplayLevel {
@@ -45,10 +45,11 @@ class ModuleNotClass : AbstractVerikInspection() {
             val declarationKeyword = classOrObject.getDeclarationKeyword()
             val isModule = classOrObject.superTypeListEntries.any { it.text.removeSuffix("()") == "Module" }
             if (declarationKeyword != null && isModule) {
-                val isObject = declarationKeyword.text == "object"
+                val isClass = declarationKeyword.text == "class"
+                val isSynthTop = classOrObject.annotationEntries.any { it.shortName.toString() == "SynthTop" }
                 val isSimTop = classOrObject.annotationEntries.any { it.shortName.toString() == "SimTop" }
-                if (isObject && !isSimTop) {
-                    holder.registerProblem(declarationKeyword, "Module must be declared as class")
+                if (isClass && !isSynthTop && isSimTop) {
+                    holder.registerProblem(declarationKeyword, "Module must be declared as object")
                 }
             }
         }

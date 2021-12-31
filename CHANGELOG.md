@@ -5,6 +5,7 @@
 - Top not module inspection.
 - Module not class and not object inspections.
 - File annotation inspection.
+- Combinational assignment not var inspection.
 
 ### Fixed
 - Syntax highlighting for block comments and annotations.

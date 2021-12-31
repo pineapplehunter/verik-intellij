@@ -20,20 +20,20 @@ import com.intellij.codeHighlighting.HighlightDisplayLevel
 import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.psi.PsiElementVisitor
 import io.verik.intellij.inspection.common.AbstractVerikInspection
-import org.jetbrains.kotlin.psi.classOrObjectVisitor
+import org.jetbrains.kotlin.psi.propertyVisitor
 
-class ModuleNotObject : AbstractVerikInspection() {
+class ComAssignmentNotVarInspection : AbstractVerikInspection() {
 
     override fun getID(): String {
-        return "VerikModuleNotObject"
+        return "VerikComAssignmentNotVar"
     }
 
     override fun getDisplayName(): String {
-        return "Module not object"
+        return "Combinational assignment not var"
     }
 
     override fun getStaticDescription(): String {
-        return "Reports modules that should be declared as object but are not."
+        return "Reports combinationally assigned properties that are not declared as var."
     }
 
     override fun getDefaultLevel(): HighlightDisplayLevel {
@@ -41,16 +41,14 @@ class ModuleNotObject : AbstractVerikInspection() {
     }
 
     override fun buildEnabledVisitor(holder: ProblemsHolder): PsiElementVisitor {
-        return classOrObjectVisitor { classOrObject ->
-            val declarationKeyword = classOrObject.getDeclarationKeyword()
-            val isModule = classOrObject.superTypeListEntries.any { it.text.removeSuffix("()") == "Module" }
-            if (declarationKeyword != null && isModule) {
-                val isClass = declarationKeyword.text == "class"
-                val isSynthTop = classOrObject.annotationEntries.any { it.shortName.toString() == "SynthTop" }
-                val isSimTop = classOrObject.annotationEntries.any { it.shortName.toString() == "SimTop" }
-                if (isClass && !isSynthTop && isSimTop) {
-                    holder.registerProblem(declarationKeyword, "Module must be declared as object")
-                }
+        return propertyVisitor { property ->
+            val isVar = property.isVar
+            val isCom = property.annotationEntries.any { it.shortName.toString() == "Com" }
+            if (!isVar && isCom) {
+                holder.registerProblem(
+                    property.valOrVarKeyword,
+                    "Combinationally assigned property should be declared as var"
+                )
             }
         }
     }
