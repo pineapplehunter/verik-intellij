@@ -32,17 +32,15 @@ abstract class AbstractVerikInspection : AbstractKotlinInspection() {
         return true
     }
 
-    override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
+    final override fun buildVisitor(holder: ProblemsHolder, isOnTheFly: Boolean): PsiElementVisitor {
         return if (isEnabled(holder)) {
             buildEnabledVisitor(holder)
         } else NULL_VISITOR
     }
 
-    open fun buildEnabledVisitor(holder: ProblemsHolder): PsiElementVisitor {
-        return NULL_VISITOR
-    }
+    abstract fun buildEnabledVisitor(holder: ProblemsHolder): PsiElementVisitor
 
-    internal fun isEnabled(holder: ProblemsHolder): Boolean {
+    private fun isEnabled(holder: ProblemsHolder): Boolean {
         val file = holder.file
         if (file !is KtFile)
             return false
@@ -53,6 +51,6 @@ abstract class AbstractVerikInspection : AbstractKotlinInspection() {
 
     companion object {
 
-        internal val NULL_VISITOR = object : KtVisitorVoid() {}
+        private val NULL_VISITOR = object : KtVisitorVoid() {}
     }
 }
