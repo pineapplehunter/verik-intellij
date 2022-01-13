@@ -3,6 +3,8 @@
 ## [Unreleased]
 ### Added
 - Annotate cardinal types and infix functions.
+- Annotate keywords `unknown` and `floating`.
+- Annotate bit literals.
 
 ## [0.1.2]
 ### Added
