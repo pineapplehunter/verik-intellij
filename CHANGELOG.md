@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Annotate cardinal types and infix functions.
 
 ## [0.1.2]
 ### Added
