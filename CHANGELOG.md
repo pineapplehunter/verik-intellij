@@ -1,10 +1,12 @@
 # Changelog
 
 ## [Unreleased]
+
+## [0.1.3]
 ### Added
 - Annotate cardinal types and infix functions.
 - Annotate keywords `unknown` and `floating`.
-- Annotate bit literals.
+- Annotate bit literals and highlight parse errors.
 
 ## [0.1.2]
 ### Added
