@@ -19,7 +19,7 @@ package io.verik.intellij.annotate
 import com.intellij.lang.annotation.AnnotationHolder
 import com.intellij.lang.annotation.Annotator
 import com.intellij.lang.annotation.HighlightSeverity
-import com.intellij.openapi.editor.colors.TextAttributesKey
+import com.intellij.openapi.editor.markup.TextAttributes
 import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.idea.highlighter.KotlinHighlightingColors
@@ -36,7 +36,15 @@ import org.jetbrains.kotlin.psi.psiUtil.startOffset
 
 class VerikAnnotator : Annotator {
 
-    private val annotatedKeywords = listOf("unknown", "floating")
+    private val ANNOTATED_KEYWORDS = listOf("unknown", "floating")
+
+    private val NUMBER_INVALID = TextAttributes(
+        KotlinHighlightingColors.NUMBER.defaultAttributes.foregroundColor,
+        KotlinHighlightingColors.NUMBER.defaultAttributes.backgroundColor,
+        KotlinHighlightingColors.INVALID_STRING_ESCAPE.defaultAttributes.effectColor,
+        KotlinHighlightingColors.INVALID_STRING_ESCAPE.defaultAttributes.effectType,
+        KotlinHighlightingColors.NUMBER.defaultAttributes.fontType
+    )
 
     override fun annotate(element: PsiElement, holder: AnnotationHolder) {
         when (element) {
@@ -67,14 +75,14 @@ class VerikAnnotator : Annotator {
         if (text.startsWith("`") && text.endsWith("`")) {
             val trimmedText = text.substring(1, text.length - 1)
             if (trimmedText.toIntOrNull() != null || trimmedText == "*") {
-                splitAnnotate(typeElement, holder, KotlinHighlightingColors.NUMBER)
+                splitAnnotate(typeElement, holder, KotlinHighlightingColors.NUMBER.defaultAttributes)
             }
         }
     }
 
     private fun annotateKeywords(simpleNameExpression: KtSimpleNameExpression, holder: AnnotationHolder) {
-        if (simpleNameExpression.getReferencedName() in annotatedKeywords) {
-            splitAnnotate(simpleNameExpression, holder, KotlinHighlightingColors.KEYWORD)
+        if (simpleNameExpression.getReferencedName() in ANNOTATED_KEYWORDS) {
+            splitAnnotate(simpleNameExpression, holder, KotlinHighlightingColors.KEYWORD.defaultAttributes)
         }
     }
 
@@ -84,23 +92,28 @@ class VerikAnnotator : Annotator {
             return
         val referenceExpression = callExpression.referenceExpression()
         if (referenceExpression is KtReferenceExpression && referenceExpression.text in listOf("u", "s")) {
-            splitAnnotate(stringTemplateExpression, holder, KotlinHighlightingColors.NUMBER)
+            val value = stringTemplateExpression.text.substring(1, stringTemplateExpression.text.length - 1)
+            if (BitConstantChecker.check(value)) {
+                splitAnnotate(stringTemplateExpression, holder, KotlinHighlightingColors.NUMBER.defaultAttributes)
+            } else {
+                splitAnnotate(stringTemplateExpression, holder, NUMBER_INVALID)
+            }
         }
     }
 
-    private fun splitAnnotate(element: PsiElement, holder: AnnotationHolder, textAttributesKey: TextAttributesKey) {
+    private fun splitAnnotate(element: PsiElement, holder: AnnotationHolder, textAttributes: TextAttributes) {
         val startOffset = element.startOffset
         val endOffset = element.endOffset
         val startTextRange = TextRange(startOffset, startOffset)
         val endTextRange = TextRange(startOffset + 1, endOffset)
         holder
             .newSilentAnnotation(HighlightSeverity.INFORMATION)
-            .textAttributes(textAttributesKey)
+            .enforcedTextAttributes(textAttributes)
             .range(startTextRange)
             .create()
         holder
             .newSilentAnnotation(HighlightSeverity.INFORMATION)
-            .textAttributes(textAttributesKey)
+            .enforcedTextAttributes(textAttributes)
             .range(endTextRange)
             .create()
     }
