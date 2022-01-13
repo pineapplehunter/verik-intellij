@@ -8,11 +8,15 @@
     <depends>org.jetbrains.kotlin</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <fileType name="SystemVerilog"
-                  implementationClass="io.verik.intellij.highlight.SystemVerilogFileType"
-                  fieldName="INSTANCE"
-                  language="SystemVerilog"
-                  extensions="v;vh;sv;svh"/>
+        <fileType
+                name="SystemVerilog"
+                implementationClass="io.verik.intellij.highlight.SystemVerilogFileType"
+                fieldName="INSTANCE"
+                language="SystemVerilog"
+                extensions="v;vh;sv;svh"/>
+        <annotator
+                language="kotlin"
+                implementationClass="io.verik.intellij.annotate.VerikAnnotator"/>
         <lang.syntaxHighlighterFactory
                 language="SystemVerilog"
                 implementationClass="io.verik.intellij.highlight.SystemVerilogHighlighterFactory"/>
