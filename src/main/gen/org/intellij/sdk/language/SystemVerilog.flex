@@ -79,6 +79,8 @@ OPERATOR = ("!" | "&" | "|" | "^" | "~" | "<" | ">" | "=" | "+" | "-" | "*" | "%
 
 %state BLOCK_COMMENT
 
+%state DOC_COMMENT
+
 %state ATTRIBUTE
 
 %state STRING
@@ -93,9 +95,23 @@ OPERATOR = ("!" | "&" | "|" | "^" | "~" | "<" | ">" | "=" | "+" | "-" | "*" | "%
 
 <YYINITIAL> \/\*                                   { yybegin(BLOCK_COMMENT); return SystemVerilogTokenTypes.BLOCK_COMMENT; }
 
-<BLOCK_COMMENT> ([^\*]+ | (\*+[^\/]))              { return SystemVerilogTokenTypes.BLOCK_COMMENT; }
+<BLOCK_COMMENT> ([^\*`]+ | (\*+[^\/]))             { return SystemVerilogTokenTypes.BLOCK_COMMENT; }
+
+<BLOCK_COMMENT> {LABEL_COMMENT}                    { return SystemVerilogTokenTypes.LABEL_COMMENT; }
+
+<BLOCK_COMMENT> `                                  { return SystemVerilogTokenTypes.BLOCK_COMMENT; }
 
 <BLOCK_COMMENT> \*+\/                              { yybegin(YYINITIAL); return SystemVerilogTokenTypes.BLOCK_COMMENT; }
+
+<YYINITIAL> \/\*\*                                 { yybegin(DOC_COMMENT); return SystemVerilogTokenTypes.DOC_COMMENT; }
+
+<DOC_COMMENT> ([^\*`]+ | (\*+[^\/]))               { return SystemVerilogTokenTypes.DOC_COMMENT; }
+
+<DOC_COMMENT> {LABEL_COMMENT}                      { return SystemVerilogTokenTypes.LABEL_COMMENT; }
+
+<DOC_COMMENT> `                                    { return SystemVerilogTokenTypes.DOC_COMMENT; }
+
+<DOC_COMMENT> \*+\/                                { yybegin(YYINITIAL); return SystemVerilogTokenTypes.DOC_COMMENT; }
 
 <YYINITIAL> \(\*                                   { yybegin(ATTRIBUTE); return SystemVerilogTokenTypes.ATTRIBUTE; }
 

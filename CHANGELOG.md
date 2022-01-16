@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Syntax highlighting for documentation comments.
 
 ## [0.1.3]
 ### Added

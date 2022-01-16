@@ -21,6 +21,7 @@ object SystemVerilogTokenTypes {
     @JvmField val LABEL_COMMENT = SystemVerilogTokenType("labelComment")
     @JvmField val LINE_COMMENT = SystemVerilogTokenType("lineComment")
     @JvmField val BLOCK_COMMENT = SystemVerilogTokenType("blockComment")
+    @JvmField val DOC_COMMENT = SystemVerilogTokenType("docComment")
     @JvmField val ATTRIBUTE = SystemVerilogTokenType("attribute")
     @JvmField val STRING = SystemVerilogTokenType("string")
     @JvmField val VALID_STRING_ESCAPE = SystemVerilogTokenType("validStringEscape")

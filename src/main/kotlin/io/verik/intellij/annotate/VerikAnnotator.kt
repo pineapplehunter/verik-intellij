@@ -36,6 +36,18 @@ import org.jetbrains.kotlin.psi.psiUtil.startOffset
 
 class VerikAnnotator : Annotator {
 
+    private val ANNOTATED_INFIX_FUNCTIONS = listOf(
+        "add",
+        "mul",
+        "and",
+        "or",
+        "xor",
+        "shl",
+        "shr",
+        "sshr",
+        "ushr"
+    )
+
     private val ANNOTATED_KEYWORDS = listOf("unknown", "floating")
 
     private val NUMBER_INVALID = TextAttributes(
@@ -62,10 +74,13 @@ class VerikAnnotator : Annotator {
         if (!operationReferenceExpression.isConventionOperator()) {
             val operationSignTokenType = operationReferenceExpression.operationSignTokenType
             if (operationSignTokenType !is KtSingleValueToken) {
-                holder
-                    .newSilentAnnotation(HighlightSeverity.INFORMATION)
-                    .textAttributes(KotlinHighlightingColors.EXTENSION_FUNCTION_CALL)
-                    .create()
+                val text = operationReferenceExpression.text
+                if (text in ANNOTATED_INFIX_FUNCTIONS) {
+                    holder
+                        .newSilentAnnotation(HighlightSeverity.INFORMATION)
+                        .textAttributes(KotlinHighlightingColors.EXTENSION_FUNCTION_CALL)
+                        .create()
+                }
             }
         }
     }

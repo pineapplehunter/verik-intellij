@@ -36,6 +36,7 @@ class SystemVerilogHighlighter : SyntaxHighlighterBase() {
             SystemVerilogTokenTypes.LABEL_COMMENT -> KotlinHighlightingColors.LINE_COMMENT
             SystemVerilogTokenTypes.LINE_COMMENT -> KotlinHighlightingColors.LINE_COMMENT
             SystemVerilogTokenTypes.BLOCK_COMMENT -> KotlinHighlightingColors.BLOCK_COMMENT
+            SystemVerilogTokenTypes.DOC_COMMENT -> KotlinHighlightingColors.DOC_COMMENT
             SystemVerilogTokenTypes.ATTRIBUTE -> KotlinHighlightingColors.ANNOTATION
             SystemVerilogTokenTypes.STRING -> KotlinHighlightingColors.STRING
             SystemVerilogTokenTypes.VALID_STRING_ESCAPE -> KotlinHighlightingColors.STRING_ESCAPE
