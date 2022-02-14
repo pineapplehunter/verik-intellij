@@ -19,9 +19,6 @@ package io.verik.intellij.inspection.common
 import com.intellij.codeInspection.InspectionToolProvider
 import com.intellij.codeInspection.LocalInspectionTool
 import io.verik.intellij.inspection.inspection.ComAssignmentNotVarInspection
-import io.verik.intellij.inspection.inspection.ModuleNotClassInspection
-import io.verik.intellij.inspection.inspection.ModuleNotObjectInspection
-import io.verik.intellij.inspection.inspection.TopNotModuleInspection
 import io.verik.intellij.inspection.inspection.UnsupportedElementInspection
 import io.verik.intellij.inspection.inspection.UnsupportedModifierInspection
 
@@ -31,9 +28,6 @@ class VerikInspectionProvider : InspectionToolProvider {
         return arrayOf(
             UnsupportedElementInspection::class.java,
             UnsupportedModifierInspection::class.java,
-            TopNotModuleInspection::class.java,
-            ModuleNotClassInspection::class.java,
-            ModuleNotObjectInspection::class.java,
             ComAssignmentNotVarInspection::class.java
         )
     }

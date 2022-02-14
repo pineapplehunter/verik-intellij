@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Added
 - Syntax highlighting for documentation comments.
+- Remove inspections for `SimTop` and `SynthTop`.
 
 ## [0.1.3]
 ### Added
