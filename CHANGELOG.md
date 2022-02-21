@@ -4,6 +4,7 @@
 ### Added
 - Syntax highlighting for documentation comments.
 - Remove inspections for `SimTop` and `SynthTop`.
+- Allow safe qualified expressions and destructuring declarations.
 
 ## [0.1.3]
 ### Added

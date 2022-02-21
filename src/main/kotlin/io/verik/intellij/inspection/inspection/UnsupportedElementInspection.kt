@@ -21,13 +21,10 @@ import com.intellij.codeInspection.ProblemsHolder
 import com.intellij.psi.PsiElementVisitor
 import io.verik.intellij.inspection.common.AbstractVerikInspection
 import org.jetbrains.kotlin.psi.KtClassLiteralExpression
-import org.jetbrains.kotlin.psi.KtDestructuringDeclaration
 import org.jetbrains.kotlin.psi.KtDoubleColonExpression
 import org.jetbrains.kotlin.psi.KtElement
-import org.jetbrains.kotlin.psi.KtImportAlias
 import org.jetbrains.kotlin.psi.KtObjectLiteralExpression
 import org.jetbrains.kotlin.psi.KtPropertyDelegate
-import org.jetbrains.kotlin.psi.KtSafeQualifiedExpression
 import org.jetbrains.kotlin.psi.KtThrowExpression
 import org.jetbrains.kotlin.psi.KtTryExpression
 import org.jetbrains.kotlin.psi.KtVisitorVoid
@@ -62,14 +59,6 @@ class UnsupportedElementInspection : AbstractVerikInspection() {
             holder.registerProblem(element, "$name is not supported")
         }
 
-        override fun visitDestructuringDeclaration(destructuringDeclaration: KtDestructuringDeclaration) {
-            registerProblem(destructuringDeclaration, "Destructuring declaration")
-        }
-
-        override fun visitImportAlias(importAlias: KtImportAlias) {
-            registerProblem(importAlias, "Import alias")
-        }
-
         override fun visitPropertyDelegate(delegate: KtPropertyDelegate) {
             registerProblem(delegate, "Property delegate")
         }
@@ -88,10 +77,6 @@ class UnsupportedElementInspection : AbstractVerikInspection() {
 
         override fun visitClassLiteralExpression(expression: KtClassLiteralExpression) {
             registerProblem(expression, "Class literal expression")
-        }
-
-        override fun visitSafeQualifiedExpression(expression: KtSafeQualifiedExpression) {
-            registerProblem(expression, "Safe qualified expression")
         }
 
         override fun visitObjectLiteralExpression(expression: KtObjectLiteralExpression) {
