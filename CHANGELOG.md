@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [0.1.4]
 ### Added
 - Syntax highlighting for documentation comments.
 - Remove inspections for `SimTop` and `SynthTop`.
