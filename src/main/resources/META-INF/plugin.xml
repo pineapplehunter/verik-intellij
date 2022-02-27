@@ -20,6 +20,15 @@
         <lang.syntaxHighlighterFactory
                 language="SystemVerilog"
                 implementationClass="io.verik.intellij.highlight.SystemVerilogHighlighterFactory"/>
+        <localInspection
+                implementationClass="io.verik.intellij.arguments.VerikArgumentsHelperInspection"
+                groupPath="Kotlin"
+                groupName="Arguments"
+                enabledByDefault="true"
+                level="INFORMATION"
+                language="kotlin"
+                hasStaticDescription="true"
+                displayName="Add missing call arguments"/>
         <inspectionToolProvider implementation="io.verik.intellij.inspection.common.VerikInspectionProvider"/>
     </extensions>
 </idea-plugin>
