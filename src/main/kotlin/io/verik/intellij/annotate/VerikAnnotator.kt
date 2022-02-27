@@ -24,6 +24,7 @@ import com.intellij.openapi.util.TextRange
 import com.intellij.psi.PsiElement
 import org.jetbrains.kotlin.idea.highlighter.KotlinHighlightingColors
 import org.jetbrains.kotlin.lexer.KtSingleValueToken
+import org.jetbrains.kotlin.psi.KtBinaryExpression
 import org.jetbrains.kotlin.psi.KtCallExpression
 import org.jetbrains.kotlin.psi.KtOperationReferenceExpression
 import org.jetbrains.kotlin.psi.KtReferenceExpression
@@ -62,6 +63,7 @@ class VerikAnnotator : Annotator {
         when (element) {
             is KtOperationReferenceExpression -> annotateInfixFunctions(element, holder)
             is KtTypeElement -> annotateCardinalTypeElements(element, holder)
+            is KtBinaryExpression -> annotateSeqAssignments(element, holder)
             is KtSimpleNameExpression -> annotateKeywords(element, holder)
             is KtStringTemplateExpression -> annotateBitLiterals(element, holder)
         }
@@ -92,6 +94,16 @@ class VerikAnnotator : Annotator {
             if (trimmedText.toIntOrNull() != null || trimmedText == "*") {
                 splitAnnotate(typeElement, holder, KotlinHighlightingColors.NUMBER.defaultAttributes)
             }
+        }
+    }
+
+    private fun annotateSeqAssignments(binaryExpression: KtBinaryExpression, holder: AnnotationHolder) {
+        if (SeqAssignmentChecker.isSeqAssignment(binaryExpression)) {
+            holder
+                .newSilentAnnotation(HighlightSeverity.INFORMATION)
+                .textAttributes(KotlinHighlightingColors.EXTENSION_FUNCTION_CALL)
+                .range(binaryExpression.operationReference)
+                .create()
         }
     }
 

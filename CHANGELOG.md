@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Highlight sequential assignments.
 
 ## [0.1.4]
 ### Added
