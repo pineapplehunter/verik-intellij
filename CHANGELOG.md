@@ -1,6 +1,8 @@
 # Changelog
 
 ## [Unreleased]
+
+## [0.1.5]
 ### Added
 - Inspection to add missing arguments.
 
