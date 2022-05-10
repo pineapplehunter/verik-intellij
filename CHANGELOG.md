@@ -2,7 +2,6 @@
 
 ## [Unreleased]
 ### Added
-- Highlight sequential assignments.
 - Inspection to add missing arguments.
 
 ## [0.1.4]
