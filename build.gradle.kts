@@ -2,6 +2,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -11,13 +12,15 @@ plugins {
     // Java support
     id("java")
     // Kotlin support
-    id("org.jetbrains.kotlin.jvm") version "1.7.22"
+    id("org.jetbrains.kotlin.jvm") version "1.8.21"
     // Gradle IntelliJ Plugin
-    id("org.jetbrains.intellij") version "1.10.1"
+    id("org.jetbrains.intellij") version "1.13.3"
     // Gradle Changelog Plugin
-    id("org.jetbrains.changelog") version "1.3.1"
+    id("org.jetbrains.changelog") version "2.0.0"
     // Ktlint Plugin
-    id("org.jlleitschuh.gradle.ktlint") version "10.3.0"
+    id("org.jlleitschuh.gradle.ktlint") version "11.3.2"
+    // version checking
+    id("com.github.ben-manes.versions") version "0.46.0"
 }
 
 group = properties("pluginGroup")
@@ -90,9 +93,9 @@ tasks {
         // Get the latest available change notes from the changelog file
         changeNotes.set(
             provider {
-                changelog.run {
+                changelog.renderItem(changelog.run {
                     getOrNull(properties("pluginVersion")) ?: getLatest()
-                }.toHTML()
+                }, Changelog.OutputType.HTML)
             }
         )
     }
